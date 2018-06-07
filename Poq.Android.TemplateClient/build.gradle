@@ -1,0 +1,37 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    apply from: '../Poq.Android.Platform/platform/versions.gradle'
+
+    ext.kotlin_version = '1.2.30'
+
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath "com.google.gms:google-services:3.1.1"
+        // Realm db
+        classpath "io.realm:realm-gradle-plugin:$realmVersion"
+        classpath "com.trickyandroid:jacoco-everywhere:$jacocoVersion"
+        classpath "io.fabric.tools:gradle:$fabricVersion"
+        classpath 'de.mobilej.unmock:UnMockPlugin:0.6.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.firebase:firebase-plugins:1.1.5'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

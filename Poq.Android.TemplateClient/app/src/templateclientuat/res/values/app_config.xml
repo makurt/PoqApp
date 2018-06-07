@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_endpoint">https://poqapiuat.azure-api.net/</string>
+    <integer name="app_id">0</integer>
+    <string name="api_version_code">1.0</string>
+</resources>

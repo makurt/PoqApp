@@ -1,0 +1,83 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+ext.basePlatformPath = '../../Poq.Android.Platform/platform/'
+ext.uiTestRunnerPath = 'com.poqstudio.app.platform.test.runner.TestRunner'
+apply from: basePlatformPath + 'platformDependencies.gradle'
+
+project.ext {
+
+    basePackageName = 'com.poqstudio.app.platform'
+    baseFabricApiSecret = 'b3f82db3e4d065f6d671b942c47e58c89d1bdf7a5b5199d3c909c332b8a22b52'
+    baseFabricApiKey = '39c7da2017701f3f41ec3fb1a3e86a96ce5d1112'
+
+    def clientVersionName = '.0'
+    def clientVersionCode = 1
+
+    templateclient = [
+            packageName    : "${basePackageName}.templateclient",
+            versionName    : "$platformVersion$clientVersionName",
+            versionCode    : clientVersionCode,
+            fabricApiSecret: baseFabricApiSecret,
+            fabricApiKey   : baseFabricApiKey
+    ]
+
+    templateclientuat = [
+            packageName    : "${basePackageName}.templateclientuat",
+            versionName    : "$platformVersion$clientVersionName",
+            versionCode    : clientVersionCode,
+            fabricApiSecret: baseFabricApiSecret,
+            fabricApiKey   : baseFabricApiKey
+    ]
+
+    templateclientstaging = [
+            packageName    : "${basePackageName}.templateclientstaging",
+            versionName    : "$platformVersion$clientVersionName",
+            versionCode    : clientVersionCode,
+            fabricApiSecret: baseFabricApiSecret,
+            fabricApiKey   : baseFabricApiKey
+    ]
+}
+
+android {
+
+    signingConfigs {
+        templateclientrelease {
+            keyAlias 'template-client-release'
+            keyPassword 'leanP0q.'
+            storeFile file('../../Keystore/PoqAppKeystore.jks')
+            storePassword 'poq1poq'
+        }
+
+        templateclientuat {
+            keyAlias 'template-client-uat'
+            keyPassword 'leanP0q.'
+            storeFile file('../../Keystore/PoqAppKeystore.jks')
+            storePassword 'poq1poq'
+        }
+    }
+
+    productFlavors {
+        templateclient {
+            signingConfig signingConfigs.templateclientrelease
+        }
+        templateclientuat {
+            signingConfig signingConfigs.templateclientuat
+        }
+        templateclientstaging {
+            signingConfig signingConfigs.templateclientuat
+        }
+    }
+
+    sourceSets.androidTest {
+        java {
+            srcDir '../../Poq.Android.Platform/app/src/androidTest/java'
+        }
+        assets.srcDirs '../../Poq.Android.Platform/app/src/androidTest/assets'
+    }
+
+}
+
+dependencies {
+    api project(path: ':platform')
+}

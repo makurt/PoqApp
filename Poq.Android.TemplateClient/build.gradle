@@ -14,8 +14,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "com.google.gms:google-services:3.1.1"
-        // Realm db
-        classpath "io.realm:realm-gradle-plugin:$realmVersion"
         classpath "com.trickyandroid:jacoco-everywhere:$jacocoVersion"
         classpath "io.fabric.tools:gradle:$fabricVersion"
         classpath 'de.mobilej.unmock:UnMockPlugin:0.6.4'

@@ -69,13 +69,6 @@ android {
         }
     }
 
-    sourceSets.androidTest {
-        java {
-            srcDir '../../Poq.Android.Platform/app/src/androidTest/java'
-        }
-        assets.srcDirs '../../Poq.Android.Platform/app/src/androidTest/assets'
-    }
-
 }
 
 dependencies {

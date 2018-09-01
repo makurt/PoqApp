@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 ext.basePlatformPath = '../../Poq.Android.Platform/platform/'
-ext.uiTestRunnerPath = 'com.poqstudio.app.platform.test.runner.TestRunner'
+ext.uiTestRunnerPath = 'com.poqstudio.app.client.test.runner.TestRunner'
 apply from: basePlatformPath + 'platformDependencies.gradle'
 
 project.ext {

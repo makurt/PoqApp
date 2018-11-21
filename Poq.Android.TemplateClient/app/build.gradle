@@ -72,5 +72,7 @@ android {
 }
 
 dependencies {
-    api project(path: ':platform')
+    implementation project(':platform')
+    implementation project(':injection.annotations')
+    kapt project(':injection.annotations.processor')
 }

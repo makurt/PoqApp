@@ -1,0 +1,21 @@
+ext {
+    poqPlatformVersion='13.1.2'
+    poqSdkVersion='0.1'
+
+    platformCompileSdkVersion = 28
+    platformMinSdkVersion = 21
+    platformTargetSdkVersion = 28
+
+    kotlinVersion = '1.3.11'
+    javaVersion = JavaVersion.VERSION_1_8
+
+    rxJava2Version = '2.2.0'
+    rxAndroidVersion = '2.0.1'
+    daggerVersion = '2.16'
+    fabricVersion = "1.26.1"
+    gradleVersion = '3.3.2'
+    constraintLayoutVersion = '1.1.2'
+    chuckVersion = "1.1.0"
+    architectureComponentsVersion = "2.0.0-rc01"
+    androidxVersion = "1.0.0"
+}

@@ -1,0 +1,75 @@
+import org.gradle.api.internal.tasks.options.Option
+
+apply plugin: 'io.fabric'   // Fabric / Crashlytics plugin for android
+
+/*
+    The following code allows an app to report Crashlytics crashes separately
+    for release and debug buildTypes when using Gradle.
+ */
+ext {
+    fabricReleaseNotesFilePath = "${project.projectDir.absolutePath}/releaseNotes.txt"
+    fabricTestersFilePath = "${project.projectDir.absolutePath}/testers.txt"
+    fabricTesterGroupsFilePath = "${project.projectDir.absolutePath}/testerGroups.txt"
+}
+File crashlyticsProperties = new File("${project.projectDir.absolutePath}/fabric.properties")
+File crashlyticsReleaseNotes = new File(fabricReleaseNotesFilePath)
+File crashlyticsTesters = new File(fabricTestersFilePath)
+File crashlyticsTesterGroups = new File(fabricTesterGroupsFilePath)
+android.applicationVariants.all { variant ->
+    def isRelease = variant.buildType.name == "release"
+    variant.productFlavors.each { flavor ->
+        def variantSuffix = variant.name.capitalize()
+        def generatePropertiesTask = task("fabricGenerateProperties${variantSuffix}") << {
+            Properties properties = new Properties()
+            properties.put("apiKey", project.ext[flavor.name].fabricApiKey)
+            properties.put("apiSecret", project.ext[flavor.name].fabricApiSecret)
+            properties.store(new FileWriter(crashlyticsProperties), "")
+        }
+
+        def generateResourcesTask = project.tasks.getByName("fabricGenerateResources${variantSuffix}")
+        generateResourcesTask.dependsOn generatePropertiesTask
+        generateResourcesTask.doLast {
+            println "Removing fabric.properties"
+            crashlyticsProperties.delete()
+        }
+
+        def uploadToFabricTask = project.tasks.getByName("crashlyticsUploadDistribution${variantSuffix}")
+        uploadToFabricTask.dependsOn generatePropertiesTask
+        uploadToFabricTask.doLast {
+            crashlyticsProperties.delete()
+            crashlyticsReleaseNotes.delete()
+            crashlyticsTesters.delete()
+            crashlyticsTesterGroups.delete()
+        }
+
+        if (isRelease) {
+            task("uploadToFabric${variantSuffix}", type: UploadToFabric) {
+
+                def prepareFabricUploadTask = task("prepareFabricUpload${variantSuffix}")
+                prepareFabricUploadTask.doLast {
+                    crashlyticsReleaseNotes.text = releaseNotes
+                    crashlyticsTesters.text = testers
+                    crashlyticsTesterGroups.text = testerGroups
+                }
+
+                dependsOn generatePropertiesTask
+                dependsOn prepareFabricUploadTask
+                dependsOn uploadToFabricTask
+
+                prepareFabricUploadTask.mustRunAfter generatePropertiesTask
+                uploadToFabricTask.mustRunAfter prepareFabricUploadTask
+
+                description = 'Uploads the apk of the selected flavor to Fabric'
+            }
+        }
+    }
+}
+
+class UploadToFabric extends DefaultTask {
+    @Option(option = "releaseNotes", description = "Release notes to be attached to the version")
+    String releaseNotes = ""
+    @Option(option = "testers", description = "Testers that will be invited to this version")
+    String testers = ""
+    @Option(option = "testerGroups", description = "Tester groups that will be invited to this version")
+    String testerGroups = ""
+} 

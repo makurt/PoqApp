@@ -1,0 +1,26 @@
+def getVersionCode() {
+    def stdout = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-list', '--count', 'HEAD'
+        standardOutput = stdout
+    }
+    Integer.parseInt(stdout.toString().trim())
+}
+
+def getVersionName() {
+    try {
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe'
+            standardOutput = stdout
+        }
+        stdout.toString().trim()
+    } catch (ignored) {
+        throw new Exception("No tag reachable from the current commit. Couldn't generate version name")
+    }
+}
+
+ext {
+    automaticVersionCode = getVersionCode()
+    automaticVersionName = getVersionName()
+} 

@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-ext.basePlatformPath = '../../Poq.Android.Platform/platform/'
 ext.uiTestRunnerPath = 'com.poqstudio.app.client.test.runner.TestRunner'
-apply from: basePlatformPath + 'platformDependencies.gradle'
+apply from: '../dagger.gradle'
+apply from: '../fabric.gradle'
+apply from: '../androidOptions.gradle'
+apply from: '../automaticVersion.gradle'
 
 project.ext {
 
@@ -16,7 +18,7 @@ project.ext {
 
     templateclient = [
             packageName    : "${basePackageName}.templateclient",
-            versionName    : "$platformVersion$clientVersionName",
+            versionName    : clientVersionName,
             versionCode    : clientVersionCode,
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
@@ -24,7 +26,7 @@ project.ext {
 
     templateclientuat = [
             packageName    : "${basePackageName}.templateclientuat",
-            versionName    : "$platformVersion$clientVersionName",
+            versionName    : clientVersionName,
             versionCode    : clientVersionCode,
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
@@ -32,7 +34,7 @@ project.ext {
 
     templateclientstaging = [
             packageName    : "${basePackageName}.templateclientstaging",
-            versionName    : "$platformVersion$clientVersionName",
+            versionName    : clientVersionName,
             versionCode    : clientVersionCode,
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
@@ -72,7 +74,9 @@ android {
 }
 
 dependencies {
-    implementation project(':platform')
-    implementation project(':injection.annotations')
-    kapt project(':injection.annotations.processor')
+    implementation("com.poqstudio:platform:$poqPlatformVersion") {
+        exclude group: 'com.readystatesoftware.chuck'
+    }
+    implementation("com.poqstudio:injection.annotations:$poqSdkVersion")
+    kapt("com.poqstudio:injection.annotations.processor:$poqSdkVersion")
 }

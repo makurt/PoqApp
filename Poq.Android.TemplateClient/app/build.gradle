@@ -13,12 +13,12 @@ project.ext {
     baseFabricApiSecret = 'b7e7cde86986c44ed41f604480d6ca6105d21df9c3e4c802678fd431dba5612e'
     baseFabricApiKey = 'e969d8b88a106b1f0af9077f58e25acf02b6dad7'
 
-    def buildVersion = automaticVersionName
-    def clientVersionCode = automaticVersionCode
+    def clientVersionName = '.0'
+    def clientVersionCode = 1
 
     templateclient = [
             packageName    : "${basePackageName}.templateclient",
-            versionName    : buildVersion,
+            versionName    : clientVersionName,
             versionCode    : clientVersionCode,
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
@@ -26,7 +26,7 @@ project.ext {
 
     templateclientuat = [
             packageName    : "${basePackageName}.templateclientuat",
-            versionName    : buildVersion,
+            versionName    : clientVersionName,
             versionCode    : clientVersionCode,
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
@@ -34,7 +34,7 @@ project.ext {
 
     templateclientstaging = [
             packageName    : "${basePackageName}.templateclientstaging",
-            versionName    : buildVersion,
+            versionName    : clientVersionName,
             versionCode    : clientVersionCode,
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey

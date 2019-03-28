@@ -39,6 +39,14 @@ project.ext {
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
     ]
+
+    templateclientproduction = [
+            packageName    : "${basePackageName}.templateclient",
+            versionName    : clientVersionName,
+            versionCode    : clientVersionCode,
+            fabricApiSecret: baseFabricApiSecret,
+            fabricApiKey   : baseFabricApiKey
+    ]
 }
 
 android {
@@ -74,6 +82,13 @@ android {
         }
     }
 
+}
+
+configurations {
+    templateclientReleaseImplementation {}
+    templateclientuatReleaseImplementation {}
+    templateclientproductionReleaseImplementation {}
+    templateclientstagingReleaseImplementation {}
 }
 
 dependencies {

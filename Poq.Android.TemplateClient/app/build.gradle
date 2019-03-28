@@ -39,6 +39,14 @@ project.ext {
             fabricApiSecret: baseFabricApiSecret,
             fabricApiKey   : baseFabricApiKey
     ]
+
+    templateclientproduction = [
+            packageName    : "${basePackageName}.templateclient",
+            versionName    : clientVersionName,
+            versionCode    : clientVersionCode,
+            fabricApiSecret: baseFabricApiSecret,
+            fabricApiKey   : baseFabricApiKey
+    ]
 }
 
 android {
@@ -69,8 +77,18 @@ android {
         templateclientstaging {
             signingConfig signingConfigs.templateclientuat
         }
+        templateclientproduction {
+            signingConfig signingConfigs.templateclientuat
+        }
     }
 
+}
+
+configurations {
+    templateclientReleaseImplementation {}
+    templateclientuatReleaseImplementation {}
+    templateclientproductionReleaseImplementation {}
+    templateclientstagingReleaseImplementation {}
 }
 
 dependencies {
@@ -79,4 +97,10 @@ dependencies {
     }
     implementation("com.poqstudio:injection.annotations:$poqSdkVersion")
     kapt("com.poqstudio:injection.annotations.processor:$poqSdkVersion")
+
+    debugImplementation "com.readystatesoftware.chuck:library:$chuckVersion"
+    templateclientuatReleaseImplementation "com.readystatesoftware.chuck:library:$chuckVersion"
+    templateclientstagingReleaseImplementation "com.readystatesoftware.chuck:library:$chuckVersion"
+    templateclientReleaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuckVersion"
+    templateclientproductionReleaseImplementation "com.readystatesoftware.chuck:library:$chuckVersion"
 }

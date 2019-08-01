@@ -1,6 +1,6 @@
 ext {
-    poqPlatformVersion='13.1.2'
-    poqSdkVersion='0.1'
+    poqPlatformVersion='14.3.0'
+    poqSdkVersion='0.6'
 
     platformCompileSdkVersion = 28
     platformMinSdkVersion = 21
@@ -11,11 +11,12 @@ ext {
 
     rxJava2Version = '2.2.0'
     rxAndroidVersion = '2.0.1'
-    daggerVersion = '2.16'
+    daggerVersion = '2.21'
     fabricVersion = "1.26.1"
     gradleVersion = '3.3.2'
     constraintLayoutVersion = '1.1.2'
     chuckVersion = "1.1.0"
     architectureComponentsVersion = "2.0.0-rc01"
     androidxVersion = "1.0.0"
+    googleServicesVersion = "4.2.0"
 }

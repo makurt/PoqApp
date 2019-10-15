@@ -1,5 +1,3 @@
-import org.gradle.api.internal.tasks.options.Option
-
 apply plugin: 'io.fabric'   // Fabric / Crashlytics plugin for android
 
 /*
@@ -19,11 +17,13 @@ android.applicationVariants.all { variant ->
     def isRelease = variant.buildType.name == "release"
     variant.productFlavors.each { flavor ->
         def variantSuffix = variant.name.capitalize()
-        def generatePropertiesTask = task("fabricGenerateProperties${variantSuffix}") << {
-            Properties properties = new Properties()
-            properties.put("apiKey", project.ext[flavor.name].fabricApiKey)
-            properties.put("apiSecret", project.ext[flavor.name].fabricApiSecret)
-            properties.store(new FileWriter(crashlyticsProperties), "")
+        def generatePropertiesTask = task("fabricGenerateProperties${variantSuffix}") {
+            doLast {
+                Properties properties = new Properties()
+                properties.put("apiKey", project.ext[flavor.name].fabricApiKey)
+                properties.put("apiSecret", project.ext[flavor.name].fabricApiSecret)
+                properties.store(new FileWriter(crashlyticsProperties), "")
+            }
         }
 
         def generateResourcesTask = project.tasks.getByName("fabricGenerateResources${variantSuffix}")

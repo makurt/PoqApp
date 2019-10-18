@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="useBottomNavigation">true</bool>
+    <bool name="useNewCart">true</bool>
+    <bool name="useNewWishlist">true</bool>
+    <bool name="useWebCheckoutBridge">true</bool>
+    <bool name="useNewProductDetail">true</bool>
+</resources>

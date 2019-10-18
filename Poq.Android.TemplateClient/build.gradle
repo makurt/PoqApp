@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "com.google.gms:google-services:$googleServicesVersion"
+        classpath "com.google.gms:google-services:$googleGmsVersion"
         classpath "io.fabric.tools:gradle:$fabricVersion"
         classpath 'de.mobilej.unmock:UnMockPlugin:0.6.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"

@@ -1,0 +1,19 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.poqstudio.app.client">
+
+    <application
+        android:name=".MyFirstPoqAppApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name" >
+
+        <!-- Crashlytics -->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e969d8b88a106b1f0af9077f58e25acf02b6dad7"
+            tools:replace="android:value" />
+
+    </application>
+
+</manifest>

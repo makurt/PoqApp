@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <font name="font_family_body_bold">@font/system_Bold</font>
+    <font name="font_family_body_regular">@font/system_Regular</font>
+    <font name="font_family_body_semibold">@font/system_Semibold</font>
+    <font name="font_family_header_bold">@font/system_Bold</font>
+    <font name="font_family_header_regular">@font/system_Regular</font>
+    <font name="font_family_header_semibold">@font/system_Semibold</font>
+    <font name="font_family_pricing_bold">@font/system_Bold</font>
+    <font name="font_family_pricing_regular">@font/system_Regular</font>
+    <font name="font_family_pricing_semibold">@font/system_Semibold</font>
+</resources>

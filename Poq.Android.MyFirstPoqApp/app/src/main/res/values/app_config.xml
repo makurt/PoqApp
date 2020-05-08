@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="useBottomNavigation">true</bool>
+    <bool name="useNewCart">true</bool>
+    <bool name="useNewWishlist">true</bool>
+    <bool name="useWebCheckoutBridge">true</bool>
+    <bool name="useNewProductDetail">true</bool>
+
+    <string name="aspect_ratio_image_view">1.5</string>
+</resources>

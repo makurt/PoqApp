@@ -1,15 +1,17 @@
 package com.poqstudio.app.client
 
+import com.poqstudio.app.client.di.BaseActivityBuilder
+import com.poqstudio.app.client.di.FirstAppActivityBuilder
 import com.poqstudio.app.client.di.customScreenModule
 import com.poqstudio.app.platform.PoqApplication
 import com.poqstudio.app.platform.PoqApplicationComponent
-import com.poqstudio.app.platform.dagger.component.ActivityBuilder
 import com.poqstudio.app.platform.injection.annotations.PoqComponent
 import org.koin.core.context.loadKoinModules
 
 @PoqComponent(
     extraModules = [
-        ActivityBuilder::class
+        BaseActivityBuilder::class,
+        FirstAppActivityBuilder::class
     ]
 ) class MyFirstPoqAppApplication : PoqApplication() {
     

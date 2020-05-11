@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.poqstudio.app.client.cart.CustomCartViewModel" />
+    </data>
+
+    <com.poqstudio.app.platform.view.common.PoqSwipeRefreshLayout
+        android:id="@+id/cart_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:getCartLoading="@{viewModel.cartStateViewModel.getCartLoading}"
+        app:isEditMode="@{viewModel.isEditMode}"
+        app:loadingScreen="@{cartLoadingScreen}"
+        app:onRefreshListener="@{() -> viewModel.loadCart()}"
+        app:updateCartLoading="@{viewModel.cartStateViewModel.updateCartLoading}">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/cart_current_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.countryName}"
+                    android:gravity="center_horizontal" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cart_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_above="@+id/cart_checkout_panel_view"
+                    android:orientation="vertical"
+                    android:layout_below="@id/cart_current_country"
+                    app:visibleOrGone="@{viewModel.cartStateViewModel.displayCartData}" />
+
+                <com.poqstudio.platform.view.checkout.cart.ui.PoqCheckoutPanelView
+                    android:id="@+id/cart_checkout_panel_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:clipToPadding="false"
+                    app:isEditMode="@{viewModel.isEditMode}"
+                    app:viewModel="@{viewModel.checkoutPanelViewModel}"
+                    app:visibleOrGone="@{viewModel.cartStateViewModel.displayCartData}" />
+            </RelativeLayout>
+
+            <com.poqstudio.core.ui.view.screen.EmptyScreen
+                android:id="@+id/empty_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconDrawable="@{@drawable/icon_empty_cart}"
+                app:messageText="@{@string/message_cart_empty}"
+                app:titleText="@{@string/title_cart_empty}"
+                app:visibleOrGone="@{viewModel.cartStateViewModel.isEmptyScreen}" />
+
+            <com.poqstudio.core.ui.view.screen.ErrorScreen
+                android:id="@+id/error_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:titleText="@{@string/message_cart_error_screen_title}"
+                android:visibility="gone" />
+
+            <com.poqstudio.platform.view.checkout.cart.ui.ShimmerCartView
+                android:id="@+id/cart_loading_screen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include
+                layout="@layout/update_layout"
+                app:visibility="@{viewModel.cartStateViewModel.getUpdateCartLoading}" />
+
+        </FrameLayout>
+    </com.poqstudio.app.platform.view.common.PoqSwipeRefreshLayout>
+</layout>

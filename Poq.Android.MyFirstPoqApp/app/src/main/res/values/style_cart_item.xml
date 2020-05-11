@@ -2,6 +2,7 @@
 <resources>
 
     <item name="itemCartListLayout" type="layout" >@layout/changed_item_cart_list</item>
+    <item name="cartViewLayout" type="layout">@layout/changed_cart_view</item>
 
     <style name="ChangedCartItemStyle" parent="label_body" />
 
